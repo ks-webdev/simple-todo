@@ -10,6 +10,15 @@ add.addEventListener('click', (e) => {
   let todoText = form.children[0].value
   let todoMonth = form.children[1].value
   let todoDay = form.children[2].value
+
+  if (todoMonth.length < 2) {
+    todoMonth = '0' + todoMonth
+  }
+
+  if (todoDay.length < 2) {
+    todoDay = '0' + todoDay
+  }
+
   let todoDate = todoMonth.toString() + todoDay.toString() //String
 
   if ((todoText === '') | (todoDate === '')) {
@@ -25,14 +34,6 @@ add.addEventListener('click', (e) => {
   ) {
     alert("Please make sure you've correct month and date.")
     return // don't need any return below
-  }
-
-  if (todoMonth.length < 2) {
-    todoMonth = '0' + todoMonth
-  }
-
-  if (todoDay.length < 2) {
-    todoDay = '0' + todoDay
   }
 
   let errorMonths = [
