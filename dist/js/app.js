@@ -5,7 +5,7 @@ const clearBtn = document.querySelector('.clear button')
 add.addEventListener('click', (e) => {
   e.preventDefault()
 
-  // 入力データの取得と日付の検証
+  // get the input values
   let form = e.target.parentElement
   let todoText = form.children[0].value
   let todoMonth = form.children[1].value
@@ -36,17 +36,7 @@ add.addEventListener('click', (e) => {
     return // don't need any return below
   }
 
-  let errorMonths = [
-    '0230',
-    '230',
-    '0431',
-    '431',
-    '0631',
-    '631',
-    '0931',
-    '931',
-    '1131',
-  ]
+  let errorMonths = ['0230', '0231', '0431', '0631', '0931', '1131']
 
   for (let n = 0; n < errorMonths.length; n++) {
     if (errorMonths[n] == todoDate) {
@@ -55,7 +45,7 @@ add.addEventListener('click', (e) => {
     }
   }
 
-  // todoリストを作成
+  // create a todo list
   let todo = document.createElement('div')
   todo.classList.add('todo')
 
@@ -70,8 +60,8 @@ add.addEventListener('click', (e) => {
   todo.appendChild(text)
   todo.appendChild(time)
 
-  // チェックとゴミ箱のボタンを作成
-  // チェックボタン
+  // create green check and red trash can
+  // check button
   let completeBtn = document.createElement('button')
   completeBtn.classList.add('complete')
 
@@ -81,7 +71,7 @@ add.addEventListener('click', (e) => {
     todoItem.classList.toggle('done')
   })
 
-  // ゴミ箱ボタン
+  // trash button
   let trashBtn = document.createElement('button')
   trashBtn.classList.add('trash')
   trashBtn.innerHTML = '<i class="fas fa-trash"></i>'
@@ -110,7 +100,7 @@ add.addEventListener('click', (e) => {
   todo.appendChild(completeBtn)
   todo.appendChild(trashBtn)
 
-  // オブジェプトの作成
+  // create an object
   let myTodo = {
     todoText: todoText,
     todoMonth: todoMonth,
@@ -118,6 +108,7 @@ add.addEventListener('click', (e) => {
     todoDate: todoDate,
   }
 
+  // store data into an array of objects
   let myList = localStorage.getItem('list')
   if (myList == null) {
     localStorage.setItem('list', JSON.stringify([myTodo]))
@@ -129,7 +120,7 @@ add.addEventListener('click', (e) => {
 
   form.children[0].value = ''
 
-  // DOMに入れ
+  // Add everything into the DOM
   section.appendChild(todo)
 })
 loadData()
@@ -152,7 +143,8 @@ function loadData() {
       todo.appendChild(text)
       todo.appendChild(time)
 
-      // チェックボタンとゴミ箱ボタン
+      // create green check and red trash can
+      // check button
       let completeBtn = document.createElement('button')
       completeBtn.classList.add('complete')
 
@@ -161,7 +153,8 @@ function loadData() {
         let todoItem = e.target.parentElement
         todoItem.classList.toggle('done')
       })
-      
+
+      // trash button
       let trashBtn = document.createElement('button')
       trashBtn.classList.add('trash')
       trashBtn.innerHTML = '<i class="fas fa-trash"></i>'
@@ -195,7 +188,7 @@ function loadData() {
   }
 }
 
-//　時間順並べ機能
+// Alforithm: Merge Sort
 function mergeTime(arr1, arr2) {
   let result = []
   let i = 0
@@ -251,7 +244,6 @@ sortButton.addEventListener('click', () => {
   loadData()
 })
 
-// クリア機能
 function clearData() {
   clearBtn.addEventListener('click', (e) => {
     e.preventDefault()
