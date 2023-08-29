@@ -5,7 +5,7 @@ const clearBtn = document.querySelector('.clear button')
 add.addEventListener('click', (e) => {
   e.preventDefault()
 
-  // get the input values
+  // 入力データの取得と日付の検証
   let form = e.target.parentElement
   let todoText = form.children[0].value
   let todoMonth = form.children[1].value
@@ -55,7 +55,7 @@ add.addEventListener('click', (e) => {
     }
   }
 
-  // create a todo list
+  // todoリストを作成
   let todo = document.createElement('div')
   todo.classList.add('todo')
 
@@ -70,8 +70,8 @@ add.addEventListener('click', (e) => {
   todo.appendChild(text)
   todo.appendChild(time)
 
-  // create green check and red trash can
-  // check button
+  // チェックとゴミ箱のボタンを作成
+  // チェックボタン
   let completeBtn = document.createElement('button')
   completeBtn.classList.add('complete')
 
@@ -81,7 +81,7 @@ add.addEventListener('click', (e) => {
     todoItem.classList.toggle('done')
   })
 
-  // trash button
+  // ゴミ箱ボタン
   let trashBtn = document.createElement('button')
   trashBtn.classList.add('trash')
   trashBtn.innerHTML = '<i class="fas fa-trash"></i>'
@@ -110,7 +110,7 @@ add.addEventListener('click', (e) => {
   todo.appendChild(completeBtn)
   todo.appendChild(trashBtn)
 
-  // create an object
+  // オブジェプトの作成
   let myTodo = {
     todoText: todoText,
     todoMonth: todoMonth,
@@ -118,7 +118,6 @@ add.addEventListener('click', (e) => {
     todoDate: todoDate,
   }
 
-  // store data into an array of objects
   let myList = localStorage.getItem('list')
   if (myList == null) {
     localStorage.setItem('list', JSON.stringify([myTodo]))
@@ -130,7 +129,7 @@ add.addEventListener('click', (e) => {
 
   form.children[0].value = ''
 
-  // Add everything into the DOM
+  // DOMに入れ
   section.appendChild(todo)
 })
 loadData()
@@ -153,8 +152,7 @@ function loadData() {
       todo.appendChild(text)
       todo.appendChild(time)
 
-      // create green check and red trash can
-      // check button
+      // チェックボタンとゴミ箱ボタン
       let completeBtn = document.createElement('button')
       completeBtn.classList.add('complete')
 
@@ -163,8 +161,7 @@ function loadData() {
         let todoItem = e.target.parentElement
         todoItem.classList.toggle('done')
       })
-
-      // trash button
+      
       let trashBtn = document.createElement('button')
       trashBtn.classList.add('trash')
       trashBtn.innerHTML = '<i class="fas fa-trash"></i>'
@@ -198,7 +195,7 @@ function loadData() {
   }
 }
 
-// Alforithm: Merge Sort
+//　時間順並べ機能
 function mergeTime(arr1, arr2) {
   let result = []
   let i = 0
@@ -254,6 +251,7 @@ sortButton.addEventListener('click', () => {
   loadData()
 })
 
+// クリア機能
 function clearData() {
   clearBtn.addEventListener('click', (e) => {
     e.preventDefault()
