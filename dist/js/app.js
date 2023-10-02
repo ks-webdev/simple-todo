@@ -23,7 +23,7 @@ add.addEventListener('click', (e) => {
 
   if ((todoText === '') | (todoDate === '')) {
     alert("Please make sure you've already entered text and date.")
-    return // don't need any return below
+    return
   }
 
   if (
@@ -32,16 +32,16 @@ add.addEventListener('click', (e) => {
     (todoDay.length > 2) |
     (todoMonth.length > 2)
   ) {
-    alert("Please make sure you've correct month and date.")
-    return // don't need any return below
+    alert("正しい日付をご入力ください。")
+    return 
   }
 
   let errorMonths = ['0230', '0231', '0431', '0631', '0931', '1131']
 
   for (let n = 0; n < errorMonths.length; n++) {
     if (errorMonths[n] == todoDate) {
-      alert("Please make sure you've correct month and date.")
-      return // don't need any return below
+      alert("正しい日付をご入力ください。")
+      return 
     }
   }
 
@@ -60,8 +60,7 @@ add.addEventListener('click', (e) => {
   todo.appendChild(text)
   todo.appendChild(time)
 
-  // create green check and red trash can
-  // check button
+  // チェックボタン
   let completeBtn = document.createElement('button')
   completeBtn.classList.add('complete')
 
@@ -71,7 +70,7 @@ add.addEventListener('click', (e) => {
     todoItem.classList.toggle('done')
   })
 
-  // trash button
+  // ゴミ箱ボタン
   let trashBtn = document.createElement('button')
   trashBtn.classList.add('trash')
   trashBtn.innerHTML = '<i class="fas fa-trash"></i>'
@@ -80,9 +79,9 @@ add.addEventListener('click', (e) => {
     let todoItem = e.target.parentElement
     todoItem.style = 'animation: scaleDown 0.3s forwards;'
 
-    // the div will disappeared once the animation is ended.
+
     todoItem.addEventListener('animationend', () => {
-      // remove from localstorage
+      // ローカルストレジから消す
       let text = todoItem.children[0].innerText
       let myListArray = JSON.parse(localStorage.getItem('list'))
       myListArray.forEach((item, index) => {
@@ -100,7 +99,7 @@ add.addEventListener('click', (e) => {
   todo.appendChild(completeBtn)
   todo.appendChild(trashBtn)
 
-  // create an object
+  // オブジェクト
   let myTodo = {
     todoText: todoText,
     todoMonth: todoMonth,
@@ -120,7 +119,6 @@ add.addEventListener('click', (e) => {
 
   form.children[0].value = ''
 
-  // Add everything into the DOM
   section.appendChild(todo)
 })
 loadData()
@@ -143,8 +141,7 @@ function loadData() {
       todo.appendChild(text)
       todo.appendChild(time)
 
-      // create green check and red trash can
-      // check button
+      // チェックボタン
       let completeBtn = document.createElement('button')
       completeBtn.classList.add('complete')
 
@@ -154,7 +151,7 @@ function loadData() {
         todoItem.classList.toggle('done')
       })
 
-      // trash button
+      // ゴミ箱ボタン
       let trashBtn = document.createElement('button')
       trashBtn.classList.add('trash')
       trashBtn.innerHTML = '<i class="fas fa-trash"></i>'
@@ -163,9 +160,8 @@ function loadData() {
         let todoItem = e.target.parentElement
         todoItem.style = 'animation: scaleDown 0.3s forwards;'
 
-        // the div will disappeared once the animation is ended.
         todoItem.addEventListener('animationend', () => {
-          // remove from localstorage
+          // ローカルストレジから消す
           let text = todoItem.children[0].innerText
           let myListArray = JSON.parse(localStorage.getItem('list'))
           myListArray.forEach((item, index) => {
@@ -188,7 +184,7 @@ function loadData() {
   }
 }
 
-// Alforithm: Merge Sort
+// フィルター機能
 function mergeTime(arr1, arr2) {
   let result = []
   let i = 0
@@ -234,13 +230,13 @@ sortButton.addEventListener('click', () => {
   let sortedArray = mergeSort(JSON.parse(localStorage.getItem('list')))
   localStorage.setItem('list', JSON.stringify(sortedArray))
 
-  // remove Array
+
   let len = section.children.length
   for (let i = 0; i < len; i++) {
     section.children[0].remove()
   }
 
-  //  Load data
+
   loadData()
 })
 
